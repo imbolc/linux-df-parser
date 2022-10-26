@@ -50,8 +50,8 @@ impl Df {
     }
 
     /// Returns a [`DfLine`] by mount point
-    pub fn get_by_mount(&self, filesystem: &str) -> Option<&DfLine> {
-        self.0.iter().find(|x| x.filesystem == filesystem)
+    pub fn get_by_mount(&self, mounted: &str) -> Option<&DfLine> {
+        self.0.iter().find(|x| x.mounted == mounted)
     }
 }
 
@@ -111,8 +111,12 @@ mod tests {
         assert_eq!(df.0.len(), 3);
         assert_eq!(df.0.get(1).unwrap().mounted, "/boot");
 
-        // `get_by_mount`
+        // `get_by_filesystem`
         assert!(df.get_by_filesystem("unknown").is_none());
         assert_eq!(df.get_by_filesystem("udev").unwrap().mounted, "/dev");
+
+        // `get_by_mount`
+        assert!(df.get_by_mount("unknown").is_none());
+        assert_eq!(df.get_by_mount("/dev").unwrap().filesystem, "udev");
     }
 }
