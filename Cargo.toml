@@ -1,0 +1,12 @@
+[package]
+description = "A simple parser for the Linux `df` command"
+edition = "2021"
+license = "MIT"
+name = "linux-df-parser"
+repository = "https://github.com/imbolc/linux-df-parser"
+version = "0.1.0"
+
+[dependencies]
+
+[dev-dependencies]
+rusty-hook = "0.11"
